@@ -1,0 +1,13 @@
+{
+    "languageserver": {
+        "coc-clangd": {
+            "command": "clangd",
+            "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vscode", ".vim", ".git"],
+            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+            "initializationOptions": {
+            }
+        }
+    }
+
+
+}
