@@ -6,6 +6,8 @@ set notimeout		" 关闭命令输入的短暂超时
 set jumpoptions=stack	" jump list
 set wildmode=list:longest   " 设置补全
 let mapleader = "\<SPACE>" " 设置leader键
+" 取消注释行 o O(命令行模式) 换行(插入模式) 自动补全注释
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " 解决中文字符显示乱码
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
@@ -15,7 +17,6 @@ set encoding=utf-8
 set tabstop=4
 set shiftwidth=4
 set expandtab
-
 " 开启高亮光标行
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -39,8 +40,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'preservim/nerdtree'
 
-    " file finder
-    Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+    " file finder(暂时禁用, 没有python扩展支持)
+    " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
     " need : 1.nodejs(>=14.x); 2.yarn
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -56,12 +57,14 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 " ------airline-------------
 " 关闭空白符检测
 let g:airline#extensions#whitespace#enabled=0
+
 " tabline中buffer显示编号
 let g:airline#extensions#tabline#left_alt_sep = ':' "tabline中buffer显示编号
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
-let g:airline_section_z = '%l of %v %p%%'
-
+" 对于z区域, %l是当前行数 %L是当前文件的行数 %p是当前在文件的百分之几
+" %v是当前行的第几个字符
+let g:airline_section_z = '%l of %L %p%%'
 
 "------NERDTree------------
 nnoremap <leader>e :NERDTreeToggle<CR> " Leader+e 呼出
@@ -85,17 +88,17 @@ let g:rainbow_conf = {
 \}
 
 " ------Yggdroot/LeaderF--------
-let g:Lf_WindowPosition='right'
-let g:Lf_PreviewInPopup=1
-let g:Lf_CommandMap = {
-\   '<C-p>': ['<C-k>'],
-\   '<C-k>': ['<C-p>'],
-\   '<C-j>': ['<C-n>']
-\}
-nmap <leader>f :Leaderf file<CR>        " 查找文件
-nmap <leader>b :Leaderf! buffer<CR>     " 切换已经开打的文件
-nmap <leader>F :Leaderf rg<CR>          " 按内容查找
-let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
+" let g:Lf_WindowPosition='right'
+" let g:Lf_PreviewInPopup=1
+" let g:Lf_CommandMap = {
+" \   '<C-p>': ['<C-k>'],
+" \   '<C-k>': ['<C-p>'],
+" \   '<C-j>': ['<C-n>']
+" \}
+" nmap <leader>f :Leaderf file<CR>        " 查找文件
+" nmap <leader>b :Leaderf! buffer<CR>     " 切换已经开打的文件
+" nmap <leader>F :Leaderf rg<CR>          " 按内容查找
+" let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
 
 " -------coc extensions--------
 " need clangd
