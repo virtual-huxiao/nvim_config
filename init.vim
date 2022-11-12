@@ -16,6 +16,16 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" 开启高亮光标行
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" 开启高亮光标列
+set cursorcolumn
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+
+" 显示空白空格
+set list
+set listchars=tab:•\ ,trail:•,extends:»,precedes:«
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -24,6 +34,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'joshdick/onedark.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'tpope/vim-fugitive' " 为airline提供git能力
+    Plug 'airblade/vim-gitgutter' " 为airline提供文件修改可视得能力
 
     Plug 'preservim/nerdtree'
 
@@ -31,7 +43,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
     " need : 1.nodejs(>=14.x); 2.yarn
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}    
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -41,7 +53,17 @@ let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
-" ------NERDTree------------
+" ------airline-------------
+" 关闭空白符检测
+let g:airline#extensions#whitespace#enabled=0
+" tabline中buffer显示编号
+let g:airline#extensions#tabline#left_alt_sep = ':' "tabline中buffer显示编号
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+let g:airline_section_z = '%l of %v %p%%'
+
+
+"------NERDTree------------
 nnoremap <leader>e :NERDTreeToggle<CR> " Leader+e 呼出
 
 " ------jiangmiao/auto-pairs-----
@@ -78,7 +100,7 @@ let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
 " -------coc extensions--------
 " need clangd
 let g:coc_global_extensions = [
-            \ 'coc-clangd', 
+            \ 'coc-clangd',
             \ 'coc-json',
             \ 'coc-vimlsp',
             \ 'coc-cmake',
