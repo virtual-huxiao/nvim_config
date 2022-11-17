@@ -32,6 +32,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'jiangmiao/auto-pairs'
 
+    Plug 'luochen1990/rainbow'  " 彩虹括号
+
     Plug 'kshenoy/vim-signature' " 显示mark标记
 
     Plug 'joshdick/onedark.vim'
@@ -75,6 +77,7 @@ nnoremap <leader>e :NERDTreeToggle<CR> " Leader+e 呼出
 let g:AutoPairsShortcutJump = '<M-n>'  " 设置跳到下一个括号对, Alt+n
 
 " ------luochen1990/rainbow-------
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
 \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
 \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
