@@ -30,6 +30,7 @@ set listchars=tab:•\ ,trail:•,extends:»,precedes:«
 
 call plug#begin('~/.config/nvim/plugged')
 
+    Plug 'ggandor/leap.nvim'  " 快速移动(s/S触发)
     Plug 'jiangmiao/auto-pairs'
 
     Plug 'luochen1990/rainbow'  " 彩虹括号
@@ -52,6 +53,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 call plug#end()
 
+" -----leap-------
+lua require('leap').add_default_mappings()
+
 syntime on
 colorscheme onedark
 let g:airline_theme='onedark'
@@ -68,7 +72,9 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " 对于z区域, %l是当前行数 %L是当前文件的行数 %p是当前在文件的百分之几
 " %v是当前行的第几个字符
-let g:airline_section_z = '%l of %L %p%%'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_section_z = '%l:%L %p%%'
 
 "------NERDTree------------
 nnoremap <leader>e :NERDTreeToggle<CR> " Leader+e 呼出
