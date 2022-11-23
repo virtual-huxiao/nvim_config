@@ -145,21 +145,23 @@ function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-imap <silent><expr> <TAB> coc#pum#visible()?coc#pum#confirm():"\<Tab>"  " tab选择建议
-imap <silent><expr> <ESC> coc#pum#visible()?coc#pum#stop():"\<Esc>"     " 当有提示时esc为关闭提示
-imap <silent><expr> <C-j> coc#pum#visible()?coc#pum#next(0):"\<C-j>"    " ctrl+j向下移动,不选择建议
-imap <silent><expr> <C-k> coc#pum#visible()?coc#pum#prev(0):"\<C-k>"    " ctrl+h向上移动,不选择建议
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent><nowait> <LEADER>d :CocList diagnostics<CR>
-nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
-nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
-nmap <LEADER>qf <Plug>(coc-fix-current)
-nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>f <Plug>(coc-format-selected)
-command! -nargs=0 Format :call CocAction('format')
+if exists(":CocInfo")
+  imap <silent><expr> <TAB> coc#pum#visible()?coc#pum#confirm():"\<Tab>"  " tab选择建议
+  imap <silent><expr> <ESC> coc#pum#visible()?coc#pum#stop():"\<Esc>"     " 当有提示时esc为关闭提示
+  imap <silent><expr> <C-j> coc#pum#visible()?coc#pum#next(0):"\<C-j>"    " ctrl+j向下移动,不选择建议
+  imap <silent><expr> <C-k> coc#pum#visible()?coc#pum#prev(0):"\<C-k>"    " ctrl+h向上移动,不选择建议
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nnoremap <silent><nowait> <LEADER>d :CocList diagnostics<CR>
+  nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
+  nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
+  nmap <LEADER>qf <Plug>(coc-fix-current)
+  nmap <leader>rn <Plug>(coc-rename)
+  xmap <leader>f <Plug>(coc-format-selected)
+  command! -nargs=0 Format :call CocAction('format')
+endif
 
 " vim-signature help
   " mx           Toggle mark 'x' and display it in the leftmost column
