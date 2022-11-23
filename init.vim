@@ -29,6 +29,7 @@ set list
 set listchars=tab:•\ ,trail:•,extends:»,precedes:«
 
 call plug#begin('~/.config/nvim/plugged')
+    " let g:plug_url_format = 'https://github.com:%s.git'
 
     Plug 'ggandor/leap.nvim'  " 快速移动(s/S触发)
     Plug 'jiangmiao/auto-pairs'
