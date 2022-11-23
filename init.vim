@@ -30,7 +30,10 @@ set listchars=tab:•\ ,trail:•,extends:»,precedes:«
 
 call plug#begin('~/.config/nvim/plugged')
     " 修改github访问方式, 非用https, 但是需要上传公钥到github
-    " let g:plug_url_format = 'git@github.com:%s.git'
+    " let g:plug_url_format = 'git@github.com/%s.git'
+    
+    " 使用代理的方式, 目前最高效的!!!
+    let g:plug_url_format = 'https://ghproxy.com/https://github.com/%s.git'
 
     Plug 'ggandor/leap.nvim'  " 快速移动(s/S触发)
     Plug 'jiangmiao/auto-pairs'
@@ -146,7 +149,7 @@ function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-if exists(":CocInfo")
+if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
   imap <silent><expr> <TAB> coc#pum#visible()?coc#pum#confirm():"\<Tab>"  " tab选择建议
   imap <silent><expr> <ESC> coc#pum#visible()?coc#pum#stop():"\<Esc>"     " 当有提示时esc为关闭提示
   imap <silent><expr> <C-j> coc#pum#visible()?coc#pum#next(0):"\<C-j>"    " ctrl+j向下移动,不选择建议
