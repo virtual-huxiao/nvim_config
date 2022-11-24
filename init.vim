@@ -16,7 +16,7 @@ set encoding=utf-8
 " --------Tab缩进设置-------
 set tabstop=4
 set shiftwidth=4
-set expandtab
+set expandtab " Tab换成空格键位
 " 开启高亮光标行
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -37,6 +37,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'ggandor/leap.nvim'  " 快速移动(s/S触发)
     Plug 'jiangmiao/auto-pairs'
+
+    Plug 'Yggdroot/indentLine'  " 缩进线显示(这个插件只能显示空格的缩进Tab不支持)
 
     Plug 'luochen1990/rainbow'  " 彩虹括号
 
@@ -167,6 +169,9 @@ if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
   command! -nargs=0 Format :call CocAction('format')
 endif
 
+"  Yggdroot/indentLine 
+let g:markdown_syntax_conceal=0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " Custom Config
 function ShowLineNumIsRelative(relative)
