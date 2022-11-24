@@ -167,7 +167,16 @@ if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
   command! -nargs=0 Format :call CocAction('format')
 endif
 
-" vim-signature help
+
+" Custom Config
+function ShowLineNumIsRelative(relative)
+    " set number
+    let &relativenumber = a:relative
+endfunction
+autocmd InsertEnter * nested : call ShowLineNumIsRelative(0) " 进入插入模式显示绝对行号
+autocmd InsertLeave * nested : call ShowLineNumIsRelative(1) " 离开插入模式显示相对行号
+
+  " vim-signature help
   " mx           Toggle mark 'x' and display it in the leftmost column
   " dmx          Remove mark 'x' where x is a-zA-Z
 
