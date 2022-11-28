@@ -35,10 +35,15 @@ call plug#begin('~/.config/nvim/plugged')
     " 使用代理的方式, 目前最高效的!!!
     let g:plug_url_format = 'https://ghproxy.com/https://github.com/%s.git'
 
+    Plug 'glepnir/dashboard-nvim' " 添加启动界面
+
     Plug 'ggandor/leap.nvim'  " 快速移动(s/S触发)
     Plug 'jiangmiao/auto-pairs'
 
-    Plug 'Yggdroot/indentLine'  " 缩进线显示(这个插件只能显示空格的缩进Tab不支持)
+    Plug 'lukas-reineke/indent-blankline.nvim' " 显示缩进线
+
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
     Plug 'luochen1990/rainbow'  " 彩虹括号
 
@@ -59,6 +64,11 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+
+if !empty(glob("~/.config/nvim/plugged/dashboard-nvim"))
+    lua require('dashboard-nvim_')
+endif
 
 " -----leap-------
 lua require('leap').add_default_mappings()
@@ -83,6 +93,15 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_section_z = '%l:%L %p%%'
 
+" index-blankline.nvim
+if !empty(glob("~/.config/nvim/plugged/indent-blankline.nvim"))
+    lua require('index-blankline_')
+endif
+" telescope
+if !empty(glob("~/.config/nvim/plugged/telescope.nvim"))
+    lua require('telescope_')
+endif
+
 "------NERDTree------------
 nnoremap <leader>e :NERDTreeToggle<CR> " Leader+e 呼出
 
@@ -104,19 +123,6 @@ let g:rainbow_conf = {
 \       'css': 0,
 \   }
 \}
-
-" ------Yggdroot/LeaderF--------
-" let g:Lf_WindowPosition='right'
-" let g:Lf_PreviewInPopup=1
-" let g:Lf_CommandMap = {
-" \   '<C-p>': ['<C-k>'],
-" \   '<C-k>': ['<C-p>'],
-" \   '<C-j>': ['<C-n>']
-" \}
-" nmap <leader>f :Leaderf file<CR>        " 查找文件
-" nmap <leader>b :Leaderf! buffer<CR>     " 切换已经开打的文件
-" nmap <leader>F :Leaderf rg<CR>          " 按内容查找
-" let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
 
 " -------coc extensions--------
 " need clangd
@@ -153,6 +159,7 @@ function! CheckBackspace() abort
 endfunction
 if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
   imap <silent><expr> <TAB> coc#pum#visible()?coc#pum#confirm():"\<Tab>"  " tab选择建议
+  imap <silent><expr> <CR>  coc#pum#visible()?coc#pum#confirm():"\<CR>"   " enter选择建议
   imap <silent><expr> <ESC> coc#pum#visible()?coc#pum#stop():"\<Esc>"     " 当有提示时esc为关闭提示
   imap <silent><expr> <C-j> coc#pum#visible()?coc#pum#next(0):"\<C-j>"    " ctrl+j向下移动,不选择建议
   imap <silent><expr> <C-k> coc#pum#visible()?coc#pum#prev(0):"\<C-k>"    " ctrl+h向上移动,不选择建议
@@ -169,9 +176,6 @@ if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
   command! -nargs=0 Format :call CocAction('format')
 endif
 
-"  Yggdroot/indentLine 
-let g:markdown_syntax_conceal=0
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " Custom Config
 function ShowLineNumIsRelative(relative)
