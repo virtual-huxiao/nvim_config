@@ -40,6 +40,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ggandor/leap.nvim'  " 快速移动(s/S触发)
     Plug 'jiangmiao/auto-pairs'
 
+    Plug 'voldikss/vim-floaterm' " 终端浮窗, 回头可以使用toggleterm.nvim替换
+
+    Plug 'simrat39/symbols-outline.nvim'  " 文件大纲, 基于LSP
+
     Plug 'lukas-reineke/indent-blankline.nvim' " 显示缩进线
 
     Plug 'nvim-lua/plenary.nvim'
@@ -55,10 +59,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'tpope/vim-fugitive' " 为airline提供git能力
     Plug 'airblade/vim-gitgutter' " 为airline提供文件修改可视得能力
 
-    Plug 'preservim/nerdtree'
-
-    " file finder(暂时禁用, 没有python扩展支持)
-    " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+    Plug 'nvim-tree/nvim-tree.lua'  " 树状目录
 
     " need : 1.nodejs(>=14.x); 2.yarn
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -101,9 +102,25 @@ endif
 if !empty(glob("~/.config/nvim/plugged/telescope.nvim"))
     lua require('telescope_')
 endif
+" symbols-outline.nvim
+if !empty(glob("~/.config/nvim/plugged/symbols-outline.nvim"))
+    lua require('SymbolsOutline_')
+endif
+" snvim-tree.lua
+if !empty(glob("~/.config/nvim/plugged/nvim-tree.lua"))
+    lua require('SnvimTree_')
+endif
+" vim-floaterm
+if !empty(glob("~/.config/nvim/plugged/vim-floaterm"))
+    let g:floaterm_width  = 0.85
+    let g:floaterm_height = 0.85
+    let g:floaterm_keymap_new    = '<F7>'   " 打开一个新的终端
+    let g:floaterm_keymap_prev   = '<F8>'   " 上一个终端
+    let g:floaterm_keymap_next   = '<F9>'   " 下一个终端
+    let g:floaterm_keymap_kill   = '<F10>'  " 关闭一个终端
+    let g:floaterm_keymap_toggle = '<F12>'  " 切换终端状态(没有的时候新建一个)
+endif
 
-"------NERDTree------------
-nnoremap <leader>e :NERDTreeToggle<CR> " Leader+e 呼出
 
 " ------jiangmiao/auto-pairs-----
 let g:AutoPairsShortcutJump = '<M-n>'  " 设置跳到下一个括号对, Alt+n
