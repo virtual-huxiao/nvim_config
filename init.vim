@@ -42,7 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'voldikss/vim-floaterm' " 终端浮窗, 回头可以使用toggleterm.nvim替换
 
-    Plug 'simrat39/symbols-outline.nvim'  " 文件大纲, 基于LSP
+    Plug 'simrat39/symbols-outline.nvim', {'branch': 'fix-outline-detection'}  " 文件大纲, 基于LSP(目前存在coc.nvim不兼容问题)
 
     Plug 'lukas-reineke/indent-blankline.nvim' " 显示缩进线
 
