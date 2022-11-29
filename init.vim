@@ -47,7 +47,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'lukas-reineke/indent-blankline.nvim' " 显示缩进线
 
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+    Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
     Plug 'luochen1990/rainbow'  " 彩虹括号
 
