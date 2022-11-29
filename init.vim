@@ -175,6 +175,7 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
+  " 光标在函数上, 显示文档信息的行为是CocAction('definitionHover')
   imap <silent><expr> <TAB> coc#pum#visible()?coc#pum#confirm():"\<Tab>"  " tab选择建议
   imap <silent><expr> <CR>  coc#pum#visible()?coc#pum#confirm():"\<CR>"   " enter选择建议
   imap <silent><expr> <ESC> coc#pum#visible()?coc#pum#stop():"\<Esc>"     " 当有提示时esc为关闭提示
