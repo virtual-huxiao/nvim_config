@@ -72,7 +72,10 @@ if !empty(glob("~/.config/nvim/plugged/dashboard-nvim"))
 endif
 
 " -----leap-------
-lua require('leap').add_default_mappings()
+if !empty(glob("~/.config/nvim/plugged/leap.nvim"))
+    lua require('leap_')
+    autocmd ColorScheme * lua require('leap').init_highlight(true)
+endif
 
 syntime on
 colorscheme onedark
