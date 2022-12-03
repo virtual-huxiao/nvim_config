@@ -42,12 +42,12 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'voldikss/vim-floaterm' " 终端浮窗, 回头可以使用toggleterm.nvim替换
 
-    Plug 'simrat39/symbols-outline.nvim'  " 文件大纲, 基于LSP
+    Plug 'simrat39/symbols-outline.nvim', {'branch': 'fix-outline-detection'}  " 文件大纲, 基于LSP(目前存在coc.nvim不兼容问题)
 
     Plug 'lukas-reineke/indent-blankline.nvim' " 显示缩进线
 
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+    Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
     Plug 'luochen1990/rainbow'  " 彩虹括号
 
@@ -178,9 +178,10 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
+  " 光标在函数上, 显示文档信息的行为是CocAction('definitionHover')
   imap <silent><expr> <TAB> coc#pum#visible()?coc#pum#confirm():"\<Tab>"  " tab选择建议
   imap <silent><expr> <CR>  coc#pum#visible()?coc#pum#confirm():"\<CR>"   " enter选择建议
-  imap <silent><expr> <ESC> coc#pum#visible()?coc#pum#stop():"\<Esc>"     " 当有提示时esc为关闭提示
+  imap <silent><expr> <ESC> coc#pum#visible()?coc#pum#cancel():"\<Esc>"     " 当有提示时esc为关闭提示
   imap <silent><expr> <C-j> coc#pum#visible()?coc#pum#next(0):"\<C-j>"    " ctrl+j向下移动,不选择建议
   imap <silent><expr> <C-k> coc#pum#visible()?coc#pum#prev(0):"\<C-k>"    " ctrl+h向上移动,不选择建议
   nmap <silent> gd <Plug>(coc-definition)

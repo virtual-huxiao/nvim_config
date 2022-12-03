@@ -18,6 +18,42 @@ require("nvim-tree").setup({
   },
   renderer = {
     group_empty = true,
+    icons = {
+      webdev_colors = true,
+      git_placement = "before",
+      padding = " ",
+      symlink_arrow = " -> ",
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+      glyphs = {
+        default = " ",
+        symlink = " ",
+        bookmark = " ",
+        folder = {
+          arrow_closed = "",
+          arrow_open = "",
+          default = ">",
+          open = "-",
+          empty = ">/",
+          empty_open = ">/",
+          symlink = "",
+          symlink_open = "",
+        },
+        git = {
+          unstaged = "M>",
+          staged = "~",
+          unmerged = "!!",
+          renamed = "rn",
+          untracked = "``",
+          deleted = "D>",
+          ignored = "--",
+        },
+      },
+    },
   },
   filters = {
     dotfiles = true,

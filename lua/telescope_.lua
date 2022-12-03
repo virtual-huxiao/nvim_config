@@ -31,7 +31,7 @@ require("telescope").setup {
 --按键设置
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fgf', builtin.git_files, {}) -- 通过git ls-files搜索, 也即项目中的内容
+-- vim.keymap.set('n', '<leader>fgf', builtin.git_files, {}) -- 通过git ls-files搜索, 也即项目中的内容(find_files如果没有发现git则显示目录)
 -- vim.keymap.set('n', '<leader>fg', builtin.live_grep, {}) -- 依赖于ripgrep:https://github.com/chinanf-boy/ripgrep-zh
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
