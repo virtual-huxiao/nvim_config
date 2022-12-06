@@ -12,7 +12,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
-
+" 共享剪切板
+set clipboard^=unnamed,unnamedplus
 " --------Tab缩进设置-------
 set tabstop=4
 set shiftwidth=4
