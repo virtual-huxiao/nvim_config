@@ -3,10 +3,9 @@
 function! coc#source#coutline#init() abort
 	return {
 	\ 'priority': 1,
-	\ 'firstMatch': 'coutline'
 	\ 'filetypes': ['cpp','cxx','cc','h','hpp','vim'],
 	\ 'shortcut': 'coutline',
-	\ 'triggerCharacters': ['coutline']
+	\ 'triggerCharacters': ['coutline'],
 	\}
 endfunction
 
