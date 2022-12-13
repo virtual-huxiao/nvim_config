@@ -198,6 +198,7 @@ if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
   nmap <leader>rn <Plug>(coc-rename)
   xmap <leader>f <Plug>(coc-format-selected)
   command! -nargs=0 Format :call CocAction('format')
+  " 添加runtimepath路径, 以便得到自定义代码片段, 自动在init.vim目录下
 endif
 
 
