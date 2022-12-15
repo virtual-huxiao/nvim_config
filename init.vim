@@ -57,7 +57,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'kshenoy/vim-signature' " 显示mark标记
 
-    Plug 'joshdick/onedark.vim'
+    " Plug 'joshdick/onedark.vim'
+    Plug 'rebelot/kanagawa.nvim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'tpope/vim-fugitive' " 为airline提供git能力
@@ -82,7 +83,7 @@ if !empty(glob("~/.config/nvim/plugged/leap.nvim"))
 endif
 
 syntime on
-colorscheme onedark
+colorscheme kanagawa
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
