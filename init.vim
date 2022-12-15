@@ -48,6 +48,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'simrat39/symbols-outline.nvim', {'branch': 'fix-outline-detection'}  " 文件大纲, 基于LSP(目前存在coc.nvim不兼容问题)
 
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    
     Plug 'lukas-reineke/indent-blankline.nvim' " 显示缩进线
 
     Plug 'nvim-lua/plenary.nvim'
@@ -70,7 +72,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
-
 
 if !empty(glob("~/.config/nvim/plugged/dashboard-nvim"))
     lua require('dashboard-nvim_')
@@ -205,6 +206,11 @@ if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
   " 添加runtimepath路径, 以便得到自定义代码片段, 自动在init.vim目录下
 endif
 
+
+if !empty(glob("~/.config/nvim/plugged/nvim-treesitter"))
+    lua require('treesitter_')
+    hi cursorline cterm=underline  ctermfg=Yellow
+endif
 
 " Custom Config
 function ShowLineNumIsRelative(relative)
