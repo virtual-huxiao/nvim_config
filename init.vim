@@ -20,10 +20,10 @@ set shiftwidth=4
 set expandtab " Tab换成空格键位
 " 开启高亮光标行
 set cursorline
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" hi Cursorline cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " 开启高亮光标列
-set cursorcolumn
-hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" set cursorcolumn
+" hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " 开启真色彩模式
 if has("termguicolors")
     set termguicolors
