@@ -24,7 +24,10 @@ hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=whi
 " 开启高亮光标列
 set cursorcolumn
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-
+" 开启真色彩模式
+if has("termguicolors")
+    set termguicolors
+endif
 " 显示空白空格
 set list
 set listchars=tab:•\ ,trail:•,extends:»,precedes:«
