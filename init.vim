@@ -84,7 +84,10 @@ if !empty(glob("~/.config/nvim/plugged/leap.nvim"))
 endif
 
 syntime on
-colorscheme kanagawa
+" colorscheme kanagawa
+if !empty(glob("~/.config/nvim/plugged/kanagawa.nvim"))
+    lua require('kanagawa_')
+endif
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
