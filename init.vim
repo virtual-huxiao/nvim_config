@@ -68,7 +68,7 @@ call plug#begin('~/.config/nvim/plugged')
     
     " need : 1.nodejs(>=14.x); 2.yarn
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+    Plug 'windwp/nvim-autopairs'
 call plug#end()
 " require all
 lua require('dashboard-nvim_')
@@ -79,6 +79,7 @@ lua require('index-blankline_')
 lua require('telescope_')
 lua require('kanagawa_')
 lua require('SnvimTree_')
+lua require('autopairs_')
 
 syntime on
 " colorscheme kanagawa
