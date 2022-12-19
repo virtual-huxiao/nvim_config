@@ -1,3 +1,7 @@
+local status = pcall(require, "leap")
+if (not status) then
+  return
+end
 -- require('leap').add_default_mappings()
 
 -- full window search jump
@@ -18,3 +22,13 @@ function (win) return vim.api.nvim_win_get_config(win).focusable end,
 
 -- 搜索区域变成灰色
 vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
+
+vim.api.nvim_create_autocmd(
+  {"ColorScheme"},
+  {
+    pattern = "*",
+    callback = function()
+      require('leap').init_highlight(true)
+    end
+  }
+)

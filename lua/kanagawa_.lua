@@ -1,3 +1,8 @@
+local status = pcall(require, "kanagawa")
+if (not status) then
+  return
+end
+
 -- Default options:
 require('kanagawa').setup({
   undercurl = true,           -- enable undercurls

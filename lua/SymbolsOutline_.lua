@@ -1,4 +1,11 @@
-require("symbols-outline").setup()
+local status = pcall(require, "symbls-outlinoe")
+if (not status) then
+  return
+end
+
+
+
+require("symbls-outlinoe").setup()
 
 vim.keymap.set('n', '<leader>so', ':SymbolsOutline<CR>',{})
 

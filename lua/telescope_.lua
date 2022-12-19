@@ -9,7 +9,7 @@ end
 require("telescope").setup {
   defaults = {
     layout_strategy = 'vertical',
-    layout_config = { height = 0.95 },
+    layout_config = { height = 0.95, width = 0.85 },
     mappings = {
       n = {
         ["q"] = actions.close,
@@ -29,7 +29,7 @@ require("telescope").setup {
   },
   pickers = {
     find_files = {
-      theme = "dropdown",
+      -- theme = "dropdown",
     },
     buffers = {
       theme = "ivy",

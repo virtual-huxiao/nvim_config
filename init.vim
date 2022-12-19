@@ -40,9 +40,8 @@ call plug#begin('~/.config/nvim/plugged')
     let g:plug_url_format = 'https://ghproxy.com/https://github.com/%s.git'
 
     Plug 'glepnir/dashboard-nvim' " 添加启动界面
-
+    
     Plug 'ggandor/leap.nvim'  " 快速移动(s/S触发)
-    Plug 'jiangmiao/auto-pairs'
 
     Plug 'voldikss/vim-floaterm' " 终端浮窗, 回头可以使用toggleterm.nvim替换
 
@@ -54,40 +53,35 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
-
+    
     Plug 'luochen1990/rainbow'  " 彩虹括号
 
     Plug 'kshenoy/vim-signature' " 显示mark标记
 
-    " Plug 'joshdick/onedark.vim'
     Plug 'rebelot/kanagawa.nvim'
+    
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'tpope/vim-fugitive' " 为airline提供git能力
     Plug 'airblade/vim-gitgutter' " 为airline提供文件修改可视得能力
-
     Plug 'nvim-tree/nvim-tree.lua'  " 树状目录
-
+    
     " need : 1.nodejs(>=14.x); 2.yarn
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
-
-if !empty(glob("~/.config/nvim/plugged/dashboard-nvim"))
-    lua require('dashboard-nvim_')
-endif
-
-" -----leap-------
-if !empty(glob("~/.config/nvim/plugged/leap.nvim"))
-    lua require('leap_')
-    autocmd ColorScheme * lua require('leap').init_highlight(true)
-endif
+" require all
+lua require('dashboard-nvim_')
+lua require('leap_')
+lua require('SymbolsOutline_')
+lua require('treesitter_')
+lua require('index-blankline_')
+lua require('telescope_')
+lua require('kanagawa_')
+lua require('SnvimTree_')
 
 syntime on
 " colorscheme kanagawa
-if !empty(glob("~/.config/nvim/plugged/kanagawa.nvim"))
-    lua require('kanagawa_')
-endif
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -106,22 +100,7 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_section_z = '%l:%L %p%%'
 
-" index-blankline.nvim
-if !empty(glob("~/.config/nvim/plugged/indent-blankline.nvim"))
-    lua require('index-blankline_')
-endif
-" telescope
-if !empty(glob("~/.config/nvim/plugged/telescope.nvim"))
-    lua require('telescope_')
-endif
-" symbols-outline.nvim
-if !empty(glob("~/.config/nvim/plugged/symbols-outline.nvim"))
-    lua require('SymbolsOutline_')
-endif
-" snvim-tree.lua
-if !empty(glob("~/.config/nvim/plugged/nvim-tree.lua"))
-    lua require('SnvimTree_')
-endif
+
 " vim-floaterm
 if !empty(glob("~/.config/nvim/plugged/vim-floaterm"))
     let g:floaterm_width  = 0.85
@@ -132,10 +111,6 @@ if !empty(glob("~/.config/nvim/plugged/vim-floaterm"))
     let g:floaterm_keymap_kill   = '<F10>'  " 关闭一个终端
     let g:floaterm_keymap_toggle = '<F12>'  " 切换终端状态(没有的时候新建一个)
 endif
-
-
-" ------jiangmiao/auto-pairs-----
-let g:AutoPairsShortcutJump = '<M-n>'  " 设置跳到下一个括号对, Alt+n
 
 " ------luochen1990/rainbow-------
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -210,11 +185,6 @@ if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
 endif
 
 
-if !empty(glob("~/.config/nvim/plugged/nvim-treesitter"))
-    lua require('treesitter_')
-    hi cursorline cterm=underline  ctermfg=Yellow
-endif
-
 " Custom Config
 function ShowLineNumIsRelative(relative)
     " set number
@@ -224,6 +194,7 @@ autocmd InsertEnter * nested : call ShowLineNumIsRelative(0) " 进入插入模�
 autocmd InsertLeave * nested : call ShowLineNumIsRelative(1) " 离开插入模式显示相对行号
 inoremap <C-j> <Esc><Esc>o| " 下开新行, 两次esc跳出coc.nvim提示
 inoremap <C-k> <Esc><Esc>O| " 上开新行, 两次esc跳出coc.nvim提示
+lua require('custom')
 
   " vim-signature help
   " mx           Toggle mark 'x' and display it in the leftmost column
