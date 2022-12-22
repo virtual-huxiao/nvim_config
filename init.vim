@@ -20,7 +20,7 @@ set shiftwidth=4
 set expandtab " Tab换成空格键位
 " 开启高亮光标行
 set cursorline
-" hi Cursorline cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" 高亮设置见custom配置, 必须放在主题之后才能生效
 " 开启高亮光标列
 " set cursorcolumn
 " hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -197,7 +197,9 @@ inoremap <C-j> <Esc><Esc>o| " 下开新行, 两次esc跳出coc.nvim提示
 inoremap <C-k> <Esc><Esc>O| " 上开新行, 两次esc跳出coc.nvim提示
 lua require('custom')
 
-  " vim-signature help
+hi Cursorline  cterm=NONE gui=NONE guibg=#2F4F4F guifg=NONE
+
+" vim-signature help
   " mx           Toggle mark 'x' and display it in the leftmost column
   " dmx          Remove mark 'x' where x is a-zA-Z
 
