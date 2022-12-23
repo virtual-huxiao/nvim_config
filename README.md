@@ -15,7 +15,13 @@
 
 [`Neovim(>= 0.7)`](https://neovim.io/), [`Nodejs(>=14.0)`](https://nodejs.org/en/), [`clangd(>=14.0)`](https://github.com/llvm/llvm-project/releases)和 [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases);
 
+## 2.1 Windows
+
 Windows下安装这些, 非常简单; 主要就是把他们加载到`Path`环境变量中(*能在任何位置, 被命令行访问到*)就好了;或者使用Windows下的包管理工具[scoop](https://github.com/ScoopInstaller/Scoop/releases);
+
+或者直接访问其官网下载即可:	[`Neovim(>= 0.7)`](https://neovim.io/), [`Nodejs(>=14.0)`](https://nodejs.org/en/), [`clangd(>=14.0)`](https://github.com/llvm/llvm-project/releases)和 [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases);
+
+## 2.2 Linux 和 Mac
 
 Linux下, 例如Ubuntu有内部包管理工具, 但是apt安装的版本都太旧了, 所以推荐使用[Homebrew](https://brew.sh/index_zh-cn)(服务于Linux和Mac)安装;
 
@@ -23,6 +29,9 @@ Linux下, 例如Ubuntu有内部包管理工具, 但是apt安装的版本都太�
 
 1. 这里有清华源的安装说明:https://mirror.tuna.tsinghua.edu.cn/help/homebrew/
    然后就可以通过https://formulae.brew.sh/formula/查找你要安装的软件, 都是最新的!!!
+2. 路径下有`HomebrewInstall.sh`, 你可以在Ubuntu中使用`bash ./HomebrewInstall.sh`进行安装; 如果结束的话, 那么你将可以通过`sudo brew install gcc llvm node ripgrep neovim`(过程略长)进行安装了;(终端不同, 系统不同, 可以仿照修改其中的逻辑)
+
+
 
 
 
