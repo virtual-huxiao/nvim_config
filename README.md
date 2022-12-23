@@ -24,7 +24,6 @@ Linux下, 例如Ubuntu有内部包管理工具, 但是apt安装的版本都太�
 1. 这里有清华源的安装说明:https://mirror.tuna.tsinghua.edu.cn/help/homebrew/
    然后就可以通过https://formulae.brew.sh/formula/查找你要安装的软件, 都是最新的!!!
 
-2. 这个代码仓库下有一个`HomebrewInstall.sh`是一个魔改版的, 可以装装试试;
 
 
 
