@@ -1,10 +1,12 @@
-local status = pcall(require, "nvim-autopairs")
+local PlugName = 'nvim-autopairs'
+local status = pcall(require, PlugName)
 if (not status) then
-    print("can't load nvim-autopairs")
-    return
+  print("can't found Plug: <", PlugName, ">;")
+  print("Please use ':PlugInstall' to install plug.")
+  return
 end
 
-require("nvim-autopairs").setup{
+require(PlugName).setup{
     fast_wrap = {
       map = '<M-e>',
       chars = { '{', '[', '(', '"', "'"}, -- now is not supperted <> , must be costom it --

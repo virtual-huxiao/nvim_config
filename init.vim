@@ -69,7 +69,11 @@ call plug#begin('~/.config/nvim/plugged')
     " need : 1.nodejs(>=14.x); 2.yarn
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'windwp/nvim-autopairs'
+
+    Plug 'folke/which-key.nvim'
+
 call plug#end()
+
 " require all
 lua require('dashboard-nvim_')
 lua require('leap_')
@@ -80,6 +84,7 @@ lua require('telescope_')
 lua require('kanagawa_')
 lua require('SnvimTree_')
 lua require('autopairs_')
+lua require('which_key_')
 
 syntime on
 " colorscheme kanagawa
@@ -197,7 +202,7 @@ inoremap <C-j> <Esc><Esc>o| " 下开新行, 两次esc跳出coc.nvim提示
 inoremap <C-k> <Esc><Esc>O| " 上开新行, 两次esc跳出coc.nvim提示
 lua require('custom')
 
-hi Cursorline  cterm=NONE gui=NONE guibg=#2F4F4F guifg=NONE
+hi Cursorline  cterm=NONE ctermbg=NONE ctermfg=NONE gui=NONE guibg=NONE guifg=NONE
 
 " vim-signature help
   " mx           Toggle mark 'x' and display it in the leftmost column

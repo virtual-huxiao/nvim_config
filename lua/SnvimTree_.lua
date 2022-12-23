@@ -1,12 +1,15 @@
-local status = pcall(require, "nvim-tree")
+local PlugName = 'nvim-tree'
+local status = pcall(require, PlugName)
 if (not status) then
+  print("can't found Plug: <", PlugName, ">;")
+  print("Please use ':PlugInstall' to install plug.")
   return
 end
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require("nvim-tree").setup()
+require(PlugName).setup()
 
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', {})
 

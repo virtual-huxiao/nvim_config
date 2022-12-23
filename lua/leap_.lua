@@ -1,7 +1,11 @@
-local status = pcall(require, "leap")
+local PlugName = 'leap'
+local status = pcall(require, PlugName)
 if (not status) then
+  print("can't found Plug: <", PlugName, ">;")
+  print("Please use ':PlugInstall' to install plug.")
   return
 end
+
 -- require('leap').add_default_mappings()
 
 -- full window search jump

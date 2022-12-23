@@ -1,5 +1,8 @@
-local status = pcall(require, "nvim-treesitter.parsers")
+local PlugName = 'nvim-treesitter.parsers'
+local status = pcall(require, PlugName)
 if (not status) then
+  print("can't found Plug: <", PlugName, ">;")
+  print("Please use ':PlugInstall' to install plug.")
   return
 end
 
@@ -27,7 +30,7 @@ require'nvim-treesitter.configs'.setup {
   },
 
   highlight = {
-    enable = ture,
+    enable = true,
     disable = {}
   },
   indent = {

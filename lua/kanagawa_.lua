@@ -1,10 +1,13 @@
-local status = pcall(require, "kanagawa")
+local PlugName = 'kanagawa'
+local status = pcall(require, PlugName)
 if (not status) then
+  print("can't found Plug: <", PlugName, ">;")
+  print("Please use ':PlugInstall' to install plug.")
   return
 end
 
 -- Default options:
-require('kanagawa').setup({
+require(PlugName).setup({
   undercurl = true,           -- enable undercurls
   commentStyle = { italic = true },
   functionStyle = {},

@@ -1,9 +1,12 @@
-local status = pcall(require, "dashboard")
+local PlugName = 'dashboard'
+local status = pcall(require, PlugName)
 if (not status) then
+  print("can't found Plug: <", PlugName, ">;")
+  print("Please use ':PlugInstall' to install plug.")
   return
 end
 
-local db = require('dashboard')
+local db = require(PlugName)
 
 db.custom_header = {
 "  ██╗   ██╗ █████╗ ██╗  ██╗ █████╗ ███╗   ███╗ ██████╗ ███████╗",

@@ -1,12 +1,15 @@
-local status, actions = pcall(require, "telescope.actions")
+local PlugName = 'telescope'
+local status = pcall(require, PlugName)
 if (not status) then
+  print("can't found Plug: <", PlugName, ">;")
+  print("Please use ':PlugInstall' to install plug.")
   return
 end
 
---local actions = require('telescope.actions')
+local actions = require('telescope.actions')
 -- Global remapping
 ------------------------------
-require("telescope").setup {
+require(PlugName).setup {
   defaults = {
     layout_strategy = 'vertical',
     layout_config = { height = 0.95, width = 0.85 },

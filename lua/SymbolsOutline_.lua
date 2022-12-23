@@ -1,11 +1,12 @@
-local status = pcall(require, "symbls-outlinoe")
+local PlugName = 'symbols-outline'
+local status = pcall(require, PlugName)
 if (not status) then
+    print("can't found Plug: <", PlugName, ">;")
+    print("Please use ':PlugInstall' to install plug.")
   return
 end
 
-
-
-require("symbls-outlinoe").setup()
+require(PlugName).setup()
 
 vim.keymap.set('n', '<leader>so', ':SymbolsOutline<CR>',{})
 
