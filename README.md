@@ -29,7 +29,7 @@ Linux下, 例如Ubuntu有内部包管理工具, 但是apt安装的版本都太�
 
 1. 这里有清华源的安装说明:https://mirror.tuna.tsinghua.edu.cn/help/homebrew/
    然后就可以通过https://formulae.brew.sh/formula/查找你要安装的软件, 都是最新的!!!
-2. 路径下有`HomebrewInstall.sh`, 你可以在Ubuntu中使用`bash ./HomebrewInstall.sh`进行安装; 如果结束的话, 那么你将可以通过`sudo brew install gcc llvm node ripgrep neovim`(过程略长)进行安装了;(终端不同, 系统不同, 可以仿照修改其中的逻辑)
+2. 路径下有`HomebrewInstall.sh`, 你可以在Ubuntu中使用`sh./HomebrewInstall.sh`进行安装; 如果结束的话, 那么你将可以通过`sudo brew install gcc llvm node ripgrep neovim`(过程略长)进行安装了;(终端不同, 系统不同, 可以仿照修改其中的逻辑); 如果安装之后发现无法识别`brew`, 那么应该使用`source ~/.bashrc`更新配置再做尝试;
 
 
 
