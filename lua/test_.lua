@@ -13,3 +13,6 @@ elseif begin_char == '/' then
 elseif begin_char == 'C' then
     print("System is morden Windows!")
 end
+
+-- windows下cmd运行where可以获取到应用的地址
+-- linux 下cmd运行which可以获取到应用的地址
