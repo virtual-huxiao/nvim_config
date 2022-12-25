@@ -85,6 +85,7 @@ lua require('kanagawa_')
 lua require('SnvimTree_')
 lua require('autopairs_')
 lua require('which_key_')
+" lua require('test_')
 
 syntime on
 " colorscheme kanagawa
