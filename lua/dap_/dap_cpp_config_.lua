@@ -1,12 +1,3 @@
--- print(os.getenv('systemroot') .. "\n")
-local PlugName = 'dap'
-local status = pcall(require, PlugName)
-if (not status) then
-  print("can't found Plug: <", PlugName, ">;")
-  print("Please use ':PlugInstall' to install plug.")
-  return
-end
-
 -- 从命令中获取到lldb_vscode得路径
 local systemroot = os.getenv('systemroot')
 if systemroot == nil then
@@ -36,7 +27,8 @@ if lldb_vscode_path == '' then
 end
 -- print(lldb_vscode_path .. '\n')
 
-local dap = require(PlugName)
+-- config cpp debug 
+local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
     command = lldb_vscode_path,
@@ -44,10 +36,30 @@ dap.adapters.lldb = {
 }
 
 dap.configurations.cpp = {
-    name = 'launch',
-    type = 'lldb',
-    
+  -- launch exe
+    {
+        name = "Launch file",
+        type = "lldb",
+        request = "launch",
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        args = function()
+          local input = vim.fn.input("Input args: ")
+          return require("user.dap.dap-util").str2argtable(input)
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = true,
+        setupCommands = {
+          {
+            description = 'enable pretty printing',
+            text = '-enable-pretty-printing',
+            ignoreFailures = false
+          },
+        },
+    },
 }
 
+dap.configurations.c = dap.configurations.cpp
 
 

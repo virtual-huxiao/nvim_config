@@ -72,6 +72,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'folke/which-key.nvim'
 
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'rcarriga/nvim-dap-ui'
 call plug#end()
 
 " require all
@@ -85,7 +87,8 @@ lua require('kanagawa_')
 lua require('SnvimTree_')
 lua require('autopairs_')
 lua require('which_key_')
-" lua require('test_')
+lua require('dap_')
+
 
 syntime on
 " colorscheme kanagawa
