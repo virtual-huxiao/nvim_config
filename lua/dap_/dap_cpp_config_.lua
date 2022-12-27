@@ -5,8 +5,10 @@ if systemroot == nil then
     return
 end
 
+local system
 local cmd
 local lldb_vscode_path
+local separator
 local begin_char = string.sub(systemroot,1,1)
 if begin_char == '' then
     print("unknow system!\n")
@@ -14,14 +16,20 @@ if begin_char == '' then
 elseif begin_char == '/' then
     -- prtin("System is linux or unix-like.\n")
     cmd = io.popen('which lldb-vscode')
+    lldb_vscode_path = cmd:read("*all")
+    separator = '/'
+    system = '*unix'
 elseif begin_char == 'C' then
     -- print("System is morden Windows!")
     cmd = io.popen('where.exe lldb-vscode') -- https://www.codenong.com/16775686/ must use where.exe
+    lldb_vscode_path = cmd:read("*all")
+    lldb_vscode_path = string.gsub(lldb_vscode_path, '\\', '\\\\')
+    separator = '\\'
+    system = 'windows'
 end
 
-lldb_vscode_path = cmd:read("*all")
 if lldb_vscode_path == '' then
-    prtin("can't find lldb-vscode in your PATH!\n")
+    print("can't find lldb-vscode in your PATH!\n")
     print('please install llvm, and add your PATH!')
     return
 end
@@ -42,13 +50,25 @@ dap.configurations.cpp = {
         type = "lldb",
         request = "launch",
         program = function()
-          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          local ret = vim.fn.input('Path to executable: ', vim.fn.getcwd()  .. separator, 'file')
+          if system == 'windows' then
+              ret = string.gsub(ret,'/','\\')
+              ret = string.gsub(ret, '\\', '\\\\')
+          end
+          return ret
         end,
         args = function()
           local input = vim.fn.input("Input args: ")
-          return require("user.dap.dap-util").str2argtable(input)
+          return require('dap_.dap_util_').str2argtable(input)
         end,
         cwd = '${workspaceFolder}',
+        env = function()
+          local variables = {}
+          for k, v in pairs(vim.fn.environ()) do
+            table.insert(variables, string.format("%s=%s", k, v))
+          end
+          return variables
+        end,
         stopOnEntry = true,
         setupCommands = {
           {

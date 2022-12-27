@@ -87,7 +87,8 @@ lua require('kanagawa_')
 lua require('SnvimTree_')
 lua require('autopairs_')
 lua require('which_key_')
-lua require('dap_')
+lua require('dap_/dap_init_')
+lua require('keymap_')
 
 
 syntime on
