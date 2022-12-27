@@ -40,7 +40,7 @@ end
 local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
-    command = lldb_vscode_path,
+    command = lldb_vscode_path, -- lldb在Windows下只支持MinGW工具链;https://github.com/mfussenegger/nvim-dap/issues/307; 如果希望使用Win调试, 则应该使用codelldb的客户端和服务端的配对形式
     name = 'lldb',
     options = {
       -- initialize_timeout_sec = 10
@@ -73,7 +73,7 @@ dap.configurations.cpp = {
           end
           return variables
         end,
-        stopOnEntry = false,
+        stopOnEntry = true,
         runInTerminal = false,
         setupCommands = {
           {
