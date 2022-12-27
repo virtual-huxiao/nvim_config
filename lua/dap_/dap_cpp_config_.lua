@@ -41,7 +41,10 @@ local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
     command = lldb_vscode_path,
-    name = 'lldb'
+    name = 'lldb',
+    options = {
+      -- initialize_timeout_sec = 10
+    }
 }
 
 dap.configurations.cpp = {
@@ -70,7 +73,8 @@ dap.configurations.cpp = {
           end
           return variables
         end,
-        stopOnEntry = true,
+        stopOnEntry = false,
+        runInTerminal = false,
         setupCommands = {
           {
             description = 'enable pretty printing',

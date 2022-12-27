@@ -20,5 +20,6 @@ end
 
 require('dap_.dap_config_').setup()
 
+require('dap').set_log_level('TRACE')
 
 
