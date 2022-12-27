@@ -27,13 +27,14 @@ elseif begin_char == 'C' then
     separator = '\\'
     system = 'windows'
 end
+lldb_vscode_path = lldb_vscode_path:gsub("^%s+", ""):gsub("%s+$", "") -- end is ascii(10)!! fuck!!
 
 if lldb_vscode_path == '' then
     print("can't find lldb-vscode in your PATH!\n")
     print('please install llvm, and add your PATH!')
     return
 end
--- print(lldb_vscode_path .. '\n')
+
 
 -- config cpp debug 
 local dap = require('dap')
