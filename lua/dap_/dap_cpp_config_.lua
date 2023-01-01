@@ -1,64 +1,49 @@
--- 从命令中获取到lldb_vscode得路径
-local systemroot = os.getenv('systemroot')
-if systemroot == nil then
-    print("unkonw system!\n")
-    return
-end
-
-local system
-local cmd
-local lldb_vscode_path
-local separator
-local begin_char = string.sub(systemroot,1,1)
-if begin_char == '' then
-    print("unknow system!\n")
-    return
-elseif begin_char == '/' then
-    -- prtin("System is linux or unix-like.\n")
-    cmd = io.popen('which lldb-vscode')
-    lldb_vscode_path = cmd:read("*all")
-    separator = '/'
-    system = '*unix'
-elseif begin_char == 'C' then
-    -- print("System is morden Windows!")
-    cmd = io.popen('where.exe lldb-vscode') -- https://www.codenong.com/16775686/ must use where.exe
-    lldb_vscode_path = cmd:read("*all")
-    lldb_vscode_path = string.gsub(lldb_vscode_path, '\\', '\\\\')
-    separator = '\\'
-    system = 'windows'
-end
-lldb_vscode_path = lldb_vscode_path:gsub("^%s+", ""):gsub("%s+$", "") -- end is ascii(10)!! fuck!!
-
-if lldb_vscode_path == '' then
-    print("can't find lldb-vscode in your PATH!\n")
-    print('please install llvm, and add your PATH!')
-    return
-end
-
-
 -- config cpp debug 
 local dap = require('dap')
+local utils = require('utils')
 dap.adapters.lldb = {
     type = 'executable',
-    command = lldb_vscode_path, -- lldb在Windows下只支持MinGW工具链;https://github.com/mfussenegger/nvim-dap/issues/307; 如果希望使用Win调试, 则应该使用codelldb的客户端和服务端的配对形式
+    command = utils.find('lldb-vscode'), -- lldb在Windows下只支持MinGW工具链;https://github.com/mfussenegger/nvim-dap/issues/307; 如果希望使用Win调试, 则应该使用codelldb的客户端和服务端的配对形式
     name = 'lldb',
     options = {
       -- initialize_timeout_sec = 10
     }
 }
 
+local function get_codelldb_path()
+    local ret
+    if utils.system == 'windows' and utils.architecture == 'X86_64' then
+        ret = os.getenv('USERPROFILE')
+        print(ret)
+        ret = ret .. '\\AppData\\Local\\nvim\\cpp_debug_tools\\codelldb-x86_64-windows\\extension\\adapter\\codelldb.exe'
+    elseif utils.system == '*unix' and utils.architecture == 'X86_64' then
+        ret = '~/.config/nvim/codelldb-x86_64-linux/extension/adapter/codelldb'
+    elseif utils.system == '*unix' and utils.architecture == 'ARM64' then
+        ret = '~/.config/nvim/codelldb-aarch64-linux/extension/adapter/codelldb'
+    end
+    print(ret .. '\n')
+    return ret
+end
+
+dap.adapters.codelldb = {
+    type = 'server',
+    port = '13123',
+    executable = {
+        command = get_codelldb_path(),
+        args = {"--port", "13123"},
+
+        detached = false,
+    }
+}
+
 dap.configurations.cpp = {
   -- launch exe
     {
-        name = "Launch file",
+        name = "Launch file(not suppered msvc)",
         type = "lldb",
         request = "launch",
         program = function()
-          local ret = vim.fn.input('Path to executable: ', vim.fn.getcwd()  .. separator, 'file')
-          if system == 'windows' then
-              ret = string.gsub(ret,'/','\\')
-              ret = string.gsub(ret, '\\', '\\\\')
-          end
+          local ret = vim.fn.input('Path to executable: ', vim.fn.getcwd()  .. utils.separator, 'file')
           return ret
         end,
         args = function()
@@ -82,6 +67,22 @@ dap.configurations.cpp = {
             ignoreFailures = false
           },
         },
+    },
+    --codelldb
+    {
+        name = 'Lanch file with codelldb',
+        type = 'codelldb',
+        request = 'lanuch',
+        program = function()
+          local ret = vim.fn.input('Path to executable: ', vim.fn.getcwd()  .. utils.separator, 'file')
+          return ret
+        end,
+        args = function()
+        local input = vim.fn.input("Input args: ")
+            return require('dap_.dap_util_').str2argtable(input)
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = true,
     },
 }
 
