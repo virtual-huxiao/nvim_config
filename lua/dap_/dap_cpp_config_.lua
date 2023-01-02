@@ -14,23 +14,21 @@ local function get_codelldb_path()
     local ret
     if utils.system == 'windows' and utils.architecture == 'X86_64' then
         ret = os.getenv('USERPROFILE')
-        print(ret)
         ret = ret .. '\\AppData\\Local\\nvim\\cpp_debug_tools\\codelldb-x86_64-windows\\extension\\adapter\\codelldb.exe'
     elseif utils.system == '*unix' and utils.architecture == 'X86_64' then
         ret = '~/.config/nvim/codelldb-x86_64-linux/extension/adapter/codelldb'
     elseif utils.system == '*unix' and utils.architecture == 'ARM64' then
         ret = '~/.config/nvim/codelldb-aarch64-linux/extension/adapter/codelldb'
     end
-    print(ret .. '\n')
     return ret
 end
 
 dap.adapters.codelldb = {
     type = 'server',
-    port = '13123',
+    port = '${port}',
     executable = {
         command = get_codelldb_path(),
-        args = {"--port", "13123"},
+        args = {"--port", "${port}"},
 
         detached = false,
     }
