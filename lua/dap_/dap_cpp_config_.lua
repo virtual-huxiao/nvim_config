@@ -70,7 +70,7 @@ dap.configurations.cpp = {
     {
         name = 'Lanch file with codelldb',
         type = 'codelldb',
-        request = 'lanuch',
+        request = 'launch',
         program = function()
           local ret = vim.fn.input('Path to executable: ', vim.fn.getcwd()  .. utils.separator, 'file')
           return ret
