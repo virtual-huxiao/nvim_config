@@ -32,7 +32,34 @@ Linux下, 例如Ubuntu有内部包管理工具, 但是apt安装的版本都太�
 2. 路径下有`HomebrewInstall.sh`, 你可以在Ubuntu中使用`sh./HomebrewInstall.sh`进行安装; 如果结束的话, 那么你将可以通过`sudo brew install gcc llvm node ripgrep neovim`(过程略长)进行安装了;(终端不同, 系统不同, 可以仿照修改其中的逻辑); 如果安装之后发现无法识别`brew`, 那么应该使用`source ~/.bashrc`更新配置再做尝试;
 
 
+注: 目前不知道Linuxbrew出什么问题, 下载的node一直是有问题的; 当然, 我们有其他的方式可以下载node补偿;(见下方内容)
 
+### 2.2.1 Ubuntu安装的方式(使用Apt修改源安装)
 
+	1. 使用https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/中给定的换源手段
+
+```bash
+sudo sed -i "s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list
+sudo sed -i "s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list
+```
+
+2. 增加个软件源:
+
+参考: https://apt.llvm.org/, 
+
+```bash
+# 管理员打开/etc/apt/sources.list 行尾添加下面命令, 然后apt update & apt install llvm就可以了
+deb http://apt.llvm.org/unstable/ llvm-toolchain-15 main
+deb-src http://apt.llvm.org/unstable/ llvm-toolchain-15 main
+```
+
+参考https://github.com/nodesource/distributions
+
+```bash
+# 安装nodejs
+curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install -y nodejs
+```
+
+但是没有neovim最新的安装说明, ripgrep是直接可以使用apt安装的;
 
 
