@@ -1,6 +1,7 @@
 -- config cpp debug 
 local dap = require('dap')
 local utils = require('utils')
+--[[
 dap.adapters.lldb = {
     type = 'executable',
     command = utils.find('lldb-vscode'), -- lldb在Windows下只支持MinGW工具链;https://github.com/mfussenegger/nvim-dap/issues/307; 如果希望使用Win调试, 则应该使用codelldb的客户端和服务端的配对形式
@@ -9,6 +10,7 @@ dap.adapters.lldb = {
       -- initialize_timeout_sec = 10
     }
 }
+]]
 
 local function get_codelldb_path()
     local ret
@@ -35,6 +37,7 @@ dap.adapters.codelldb = {
 }
 
 dap.configurations.cpp = {
+    --[[
   -- launch exe
     {
         name = "Launch file(not suppered msvc)",
@@ -66,6 +69,7 @@ dap.configurations.cpp = {
           },
         },
     },
+    ]]
     --codelldb
     {
         name = 'Lanch file with codelldb',
@@ -80,7 +84,7 @@ dap.configurations.cpp = {
             return require('dap_.dap_util_').str2argtable(input)
         end,
         cwd = '${workspaceFolder}',
-        stopOnEntry = true,
+        stopOnEntry = false, -- on Widnows is must be false
     },
 }
 

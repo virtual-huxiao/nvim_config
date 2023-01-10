@@ -89,8 +89,8 @@ lua require('SnvimTree_')
 lua require('autopairs_')
 lua require('which_key_')
 " 目前dap的配置繁琐, 且很多东西跨系统繁琐(暂不再考虑debug的可能, 除了gdb这种形式)
-" lua require('dap_/dap_init_')
-" lua require('keymap_')
+lua require('dap_/dap_init_')
+lua require('keymap_')
 
 
 syntime on
