@@ -44,7 +44,7 @@ local function setup_sign()
           elements = {
             'scopes',
           },
-          size = 40,
+          size = 0.2,
           position = 'left',
         },
         {
@@ -53,7 +53,7 @@ local function setup_sign()
             'breakpoints',
             'watches',
           },
-          size = 40,
+          size = 0.2,
           position = 'right',
         },
         {
