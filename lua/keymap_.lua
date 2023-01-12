@@ -6,8 +6,8 @@ local keymap = vim.api.nvim_set_keymap
 
 -- Debug
 --keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint(); require'dap_.dap_util_'.store_breakpoints(true)<cr>", opts)
-keymap("n", "<leader>ob", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-keymap("n", "<leader>oB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", opts)
+keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
+keymap("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", opts)
 -- keymap("n", "<F2>", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap('n', '<F10>', '<cmd>lua require"dap_.dap_util_".reload_continue()<CR>', opts)
 keymap("n", "<Shift><F5>", "<cmd>lua require'dap'.terminate()<cr>", opts)

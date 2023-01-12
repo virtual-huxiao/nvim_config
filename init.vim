@@ -187,7 +187,7 @@ if !empty(glob("~/.config/nvim/plugged/coc.nvim"))
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
-  nnoremap <silent><nowait> <LEADER>d :CocList diagnostics<CR>
+  nnoremap <silent><nowait> <LEADER>k :CocList diagnostics<CR>
   nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
   nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
   nmap <LEADER>qf <Plug>(coc-fix-current)
